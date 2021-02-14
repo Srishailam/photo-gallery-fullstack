@@ -6,21 +6,25 @@ import { beginAddPhoto } from "../actions/photosAction";
 const UploadForm = ({ errors, dispatch }) => {
 	const [photo, setPhoto] = useState(null);
 	const [isSubmitted, setIsSubmitted] = useState(false);
-	const [errorMsg, setErrorMsg] = useState(null);
+	const [errorMsg, setErroMsg] = useState(null);
 
 	useEffect(() => {
-		setErrorMsg(errors);
+		setErroMsg(errors);
 	}, [errors]);
 
 	useEffect(() => {
-		setErrorMsg("");
+		setErroMsg(""); // reset error message on page load
 	}, []);
 
-	const handleOnChange = (e) => {};
-	const handleOnSubmit = (e) => {
-		e.preventDefault();
+	const handleOnChange = (event) => {
+		const file = event.target.files[0];
+		setPhoto(file);
+	};
+
+	const handleFormSubmit = (event) => {
+		event.preventDefault();
 		if (photo) {
-			setErrorMsg("");
+			setErroMsg("");
 			dispatch(beginAddPhoto(photo));
 			setIsSubmitted(true);
 		}
@@ -38,7 +42,7 @@ const UploadForm = ({ errors, dispatch }) => {
 				)
 			)}
 			<Form
-				onSubmit={handleOnSubmit}
+				onSubmit={handleFormSubmit}
 				method="post"
 				encType="multipart/form-data"
 				className="upload-form"

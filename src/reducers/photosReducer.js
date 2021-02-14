@@ -1,4 +1,4 @@
-const initialState = {};
+const initialState = [];
 
 const photosReducer = (state = initialState, action) => {
 	switch (action.type) {

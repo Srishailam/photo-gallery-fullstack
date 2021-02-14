@@ -14,7 +14,7 @@ const Gallery = ({ errors, photos, dispatch }) => {
 			setIsLoading(false);
 		}
 	}, [photos]);
-
+	console.log("photos", photos);
 	return (
 		<div className="Gallery">
 			<div className="photos-list">
